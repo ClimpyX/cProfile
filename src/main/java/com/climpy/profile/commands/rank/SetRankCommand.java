@@ -55,9 +55,10 @@ public class SetRankCommand implements CommandExecutor {
             return true;
         }
 
-
             RankType previousRank = targetUser.getRankType();
+
             targetUser.setRankType(rankType);
+            targetUser.setupBukkitPlayer(player);
 
             if (targetUser != user) {
                 sender.sendMessage(ChatColor.GREEN + "Seçilen oyuncu " + rankType.getColor() + rankType.getDisplayName() + ChatColor.GREEN + " sıralamasına " + (previousRank.isAboveOrEqual(RankType.getRankOrDefault(rankType.getRankName())) ? "düşürüldü" : "yükseltildi") + ".");

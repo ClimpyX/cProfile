@@ -1,6 +1,7 @@
 package com.climpy.profile.user;
 
 import com.climpy.profile.ProfileAPI;
+import com.climpy.profile.ProfilePlugin;
 import com.climpy.profile.mongo.CollectionManager;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.symbol.SymbolType;
@@ -10,7 +11,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
-
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.UUID;
@@ -41,11 +45,21 @@ public class User {
         this.vanishStatus = false;
         this.frozenStatus = false;
         this.firstJoin = true;
+
+        Player player = Bukkit.getPlayer(uniqueUUID);
+        if (player != null) {
+            this.setupBukkitPlayer(player);
+        }
     }
 
     public User(Document document) {
         this.uniqueUUID = UUID.fromString(document.getString("uniqueUUID"));
         this.loadData(document);
+
+        Player player = Bukkit.getPlayer(uniqueUUID);
+        if (player != null) {
+            this.setupBukkitPlayer(player);
+        }
     }
 
     private void loadData(Document document) {
@@ -77,5 +91,29 @@ public class User {
 
         ProfileAPI.replaceOne("user", Filters.eq("uniqueUUID", this.uniqueUUID.toString()), document, true);
         ProfileAPI.replaceOne("user", Filters.eq("onlineStatus", this.onlineStatus), document, true);
+    }
+
+    public void setupBukkitPlayer(Player player) {
+        if (player == null) {
+            return;
+        }
+
+        for (PermissionAttachmentInfo permissionAttachmentInfo : player.getEffectivePermissions()) {
+            if (permissionAttachmentInfo.getAttachment() == null || permissionAttachmentInfo.getAttachment().getPlugin() == null ||
+            !permissionAttachmentInfo.getAttachment().getPlugin().equals(ProfilePlugin.getInstance())) {
+                continue;
+            }
+
+            permissionAttachmentInfo.getAttachment().getPermissions().forEach((permission, value) -> {
+                permissionAttachmentInfo.getAttachment().unsetPermission(permission);
+            });
+        }
+
+        PermissionAttachment permissionAttachment = player.addAttachment(ProfilePlugin.getInstance());
+        for (String permission : this.rankType.getPermissions()) {
+            permissionAttachment.setPermission(permission, true);
+        }
+
+        player.recalculatePermissions();
     }
 }

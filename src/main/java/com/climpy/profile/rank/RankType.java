@@ -4,39 +4,40 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.ChatColor;
 
-import java.util.Locale;
+import java.util.*;
 
 @Getter @AllArgsConstructor
 public enum RankType {
-    OWNER("§4Owner §c", "", "owner", "§4Owner", ChatColor.RED),
-    CO_OWNER("§4Co-Owner §c", "", "coowner", "§4Co-Owner", ChatColor.RED),
-    ADMIN("§4Admin §c", "", "admin", "§cAdmin", ChatColor.RED),
-    DEVELOPER("§bDeveloper ", "", "developer", "§bDeveloper", ChatColor.AQUA),
-    BUILDTEAMPLUS("§3Mimar§c+ §b", "", "buildteam+", "§3Build Team§c+", ChatColor.AQUA),
-    BUILDTEAM("§3Mimar §b", "", "buildteam", "§3Build Team", ChatColor.BLUE),
-    MODPLUS("§2Mod§c+ §2", "", "mod+", "§2Mod§c+", ChatColor.DARK_GREEN),
-    MOD("§2Mod ", "", "mod", "§2Mod", ChatColor.DARK_GREEN),
-    CHAT_MOD("§bChatMod §9", "", "chat_mod", "§bChatMod", ChatColor.AQUA),
-    HELPER("§9Yardımcı §b", "", "helper", "§9Helper", ChatColor.AQUA),
-    TRAILERHELPER("§9Trailer Helper §b", "", "trailerhelper", "§9T. Helper", ChatColor.BLUE),
-    YOUTUBER("§6Youtuber ", "", "youtuber", "§6Youtuber", ChatColor.GOLD),
-    CVIPPLUSPLUS("§eCVIP§c++ ", "", "cvip++", "§eCVIP§c++", ChatColor.YELLOW),
-    CVIPPLUS("§eCVIP§c+ ", "", "cvip+", "§eCVIP§c+", ChatColor.YELLOW),
-    CVIP("§eCVIP ", "", "cvip", "§eCVIP", ChatColor.YELLOW),
-    MVIPPLUS("§dMVIP§e+§d ", "", "mvip+", "§dMVIP§e+", ChatColor.LIGHT_PURPLE),
-    MVIP("§dMVIP ", "", "mvip", "§dMVIP", ChatColor.LIGHT_PURPLE),
-    VIPPLUS("§bVIP§6+§b ", "", "vip+", "§bVIP§6+", ChatColor.AQUA),
-    VIP("§bVIP ", "", "vip", "§bVIP", ChatColor.AQUA),
-    DEFAULT("§9", "", "default", "§7Normal", ChatColor.BLUE);
+    OWNER("§4Owner §c", "", "owner", "§4Owner", ChatColor.RED, Arrays.asList("worldedit.*", "fawe.admin")),
+    CO_OWNER("§4Co-Owner §c", "", "coowner", "§4Co-Owner", ChatColor.RED, Arrays.asList("worldedit.*", "fawe.admin")),
+    ADMIN("§4Admin §c", "", "admin", "§cAdmin", ChatColor.RED, Arrays.asList("worldedit.*", "fawe.admin")),
+    DEVELOPER("§bDeveloper ", "", "developer", "§bDeveloper", ChatColor.AQUA, Arrays.asList("worldedit.*", "fawe.admin")),
+    BUILDTEAMPLUS("§3Mimar§c+ §b", "", "buildteam+", "§3Build Team§c+", ChatColor.AQUA, Arrays.asList("worldedit.*", "fawe.admin")),
+    BUILDTEAM("§3Mimar §b", "", "buildteam", "§3Build Team", ChatColor.BLUE, Arrays.asList("worldedit.*", "fawe.admin")),
+    MODPLUS("§2Mod§c+ §2", "", "mod+", "§2Mod§c+", ChatColor.DARK_GREEN, Arrays.asList("worldedit.*", "fawe.admin")),
+    MOD("§2Mod ", "", "mod", "§2Mod", ChatColor.DARK_GREEN, Arrays.asList("worldedit.*", "fawe.admin", "fawe.admin")),
+    CHAT_MOD("§bChatMod §9", "", "chat_mod", "§bChatMod", ChatColor.AQUA, Arrays.asList("worldedit.*", "fawe.admin")),
+    HELPER("§9Yardımcı §b", "", "helper", "§9Helper", ChatColor.AQUA, Collections.emptyList()),
+    TRAILERHELPER("§9Trailer Helper §b", "", "trailerhelper", "§9T. Helper", ChatColor.BLUE, Collections.emptyList()),
+    YOUTUBER("§6Youtuber ", "", "youtuber", "§6Youtuber", ChatColor.GOLD, Collections.emptyList()),
+    CVIPPLUSPLUS("§eCVIP§c++ ", "", "cvip++", "§eCVIP§c++", ChatColor.YELLOW, Collections.emptyList()),
+    CVIPPLUS("§eCVIP§c+ ", "", "cvip+", "§eCVIP§c+", ChatColor.YELLOW, Collections.emptyList()),
+    CVIP("§eCVIP ", "", "cvip", "§eCVIP", ChatColor.YELLOW, Collections.emptyList()),
+    MVIPPLUS("§dMVIP§e+§d ", "", "mvip+", "§dMVIP§e+", ChatColor.LIGHT_PURPLE, Collections.emptyList()),
+    MVIP("§dMVIP ", "", "mvip", "§dMVIP", ChatColor.LIGHT_PURPLE, Collections.emptyList()),
+    VIPPLUS("§bVIP§6+§b ", "", "vip+", "§bVIP§6+", ChatColor.AQUA, Collections.emptyList()),
+    VIP("§bVIP ", "", "vip", "§bVIP", ChatColor.AQUA, Collections.emptyList()),
+    DEFAULT("§9", "", "default", "§7Normal", ChatColor.BLUE, Collections.emptyList());
 
     private String prefix, suffix, rankName, displayName;
     private ChatColor color;
+    private List<String> permissions = new LinkedList<>();
 
     public boolean isAboveOrEqual(RankType rank) {
         return (ordinal() <= rank.ordinal());
     }
 
-    public static RankType getRankOrDefault(String internalName) {
+    public static RankType getRankOrDefault(String internalName, String... anan) {
         RankType rankType;
 
         try {
@@ -52,6 +53,7 @@ public enum RankType {
         String STRING_SEPARATOR = "\n";
         return separatorCheck(stringBuilder, "\n");
     }
+
     public static String separatorCheck(StringBuilder stringBuilder, String STRING_SEPARATOR) {
         String toReturn = stringBuilder.toString();
         if (toReturn.endsWith(STRING_SEPARATOR)) {
