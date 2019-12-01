@@ -1,0 +1,6 @@
+mongoDB:
+  user: root
+  database: admin
+  password: ananyanimdakarsm
+  host: localhost
+  port: 27017

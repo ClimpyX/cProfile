@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cProfile:jar">
+    <output-path>$USER_HOME$/Desktop/Proxy/SkyBlock/plugins</output-path>
+    <root id="archive" name="cProfile.jar">
+      <element id="module-output" name="cProfile" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/mongodb/mongo-java-driver/3.11.1/mongo-java-driver-3.11.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
