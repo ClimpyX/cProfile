@@ -71,7 +71,6 @@ public class CoinsCommand implements CommandExecutor {
             return true;
         }
 
-
         if(args[0].equalsIgnoreCase("ver") || args[0].equalsIgnoreCase("give")) {
             User targetUser = ProfilePlugin.getInstance().getUserManager().getUser(args[1]);
 
