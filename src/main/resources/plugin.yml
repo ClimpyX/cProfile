@@ -13,12 +13,8 @@ commands:
     aliases: [symbolset]
   symbol:
     aliases: [sembol, semboller]
-  setcoins:
-    aliases: [coinset, krediayarla]
   coins:
     aliases: [kredi]
-  givecoins:
-    aliases: [coinsgive, krediver]
   staff:
     aliases: [staffmode]
   freeze:

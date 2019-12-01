@@ -1,12 +1,9 @@
 package com.climpy.profile;
 
 import com.climpy.profile.commands.UserCommand;
-import com.climpy.profile.commands.coin.GiveCoinsCommand;
-import com.climpy.profile.commands.coin.SetCoinsCommand;
+import com.climpy.profile.commands.coin.CoinsCommand;
 import com.climpy.profile.commands.rank.ListRankCommand;
 import com.climpy.profile.commands.rank.SetRankCommand;
-import com.climpy.profile.commands.staff.FreezeCommand;
-import com.climpy.profile.commands.staff.StaffModeCommand;
 import com.climpy.profile.commands.symbol.SetSymbolCommand;
 import com.climpy.profile.commands.symbol.SymbolCommand;
 import com.climpy.profile.config.FileConfig;
@@ -114,10 +111,7 @@ public class ProfilePlugin extends JavaPlugin  {
         getCommand("listrank").setExecutor(new ListRankCommand());
         getCommand("setsymbol").setExecutor(new SetSymbolCommand());
         getCommand("symbol").setExecutor(new SymbolCommand());
-        getCommand("setcoins").setExecutor(new SetCoinsCommand());
-        getCommand("givecoins").setExecutor(new GiveCoinsCommand());
-   //     getCommand("staff").setExecutor(new StaffModeCommand());
-     //   getCommand("freeze").setExecutor(new FreezeCommand());
+        getCommand("coins").setExecutor(new CoinsCommand());
     }
 
     public static String separatorCheck(StringBuilder stringBuilder) {
