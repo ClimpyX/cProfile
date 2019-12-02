@@ -69,6 +69,7 @@ public class ProfilePlugin extends JavaPlugin  {
         });
 
         enabled = true;
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[cProfile] Sunucu: &aAcik"));
     }
 
     private void registerManagers() {
@@ -92,6 +93,7 @@ public class ProfilePlugin extends JavaPlugin  {
 
 
         enabled = false;
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[cProfile] Sunucu: &cKapali"));
         instance = null;
     }
 
@@ -142,8 +144,6 @@ public class ProfilePlugin extends JavaPlugin  {
             if (!(file = new File(this.getDataFolder().getAbsolutePath(), "config.yml")).exists()) {
                 this.mainConfig = new FileConfig(this, "config.yml");
                 this.saveConfig();
-            } else {
-                Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "(cProfile) Config tespit edildi.");
             }
         }
         catch (Exception exception) {

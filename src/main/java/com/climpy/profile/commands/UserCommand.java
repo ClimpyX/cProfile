@@ -3,6 +3,7 @@ package com.climpy.profile.commands;
 import com.climpy.profile.ProfilePlugin;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.user.User;
+import com.climpy.profile.utils.C;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,18 +24,21 @@ public class UserCommand implements CommandExecutor {
             }
         }
 
-         if(args.length == 0) {
-            sender.sendMessage(ChatColor.GREEN + "Veriler alınıyor..");
-            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(ProfilePlugin.getInstance(), new Runnable() {
-                public void run() {
-                    sender.sendMessage(ChatColor.GREEN + "Veriler başarıyla alındı.");
-                    UserMenu.INVENTORY.open(player);
-                }
-            }, 20 * 2);
-            return true;
-        }
+        sender.sendMessage(C.color("&9- Kullanıcı"));
+        sender.sendMessage(C.color(" &bIGN: &f" + user.getName()));
+        sender.sendMessage(C.color(" &bUUID: &f" + user.getUniqueUUID()));
+        sender.sendMessage(C.color(" &bIP: &f0.0.0.0"));
+        sender.sendMessage(C.color(" &bRütbe: &f" + user.getRankType()));
+        sender.sendMessage(C.color("&9- Sunucu: &f" + user.getServerName()));
+        sender.sendMessage(C.color(" &bÇevrim içi: &f-"));
+        sender.sendMessage(C.color("&9- Verileri"));
+        sender.sendMessage(C.color(" &bSembol: &f" + user.getSymbolType()));
+        sender.sendMessage(C.color(" &bKredi: &f" + user.getCredit()));
+        sender.sendMessage(C.color(" &bDurumu: &f" + user.isOnlineStatus()));
+        sender.sendMessage(C.color("&9- Zamanlama"));
+        sender.sendMessage(C.color(" &bİlk giriş: &f" + user.getFirstLoginTime()));
+        sender.sendMessage(C.color(" &bSon giriş: &f" + user.getLastLoginTime()));
 
-        player.sendMessage(args[1] + " aktiflik durumu: " + (user.isOnlineStatus() ? "a" : "b"));
         return true;
     }
 }

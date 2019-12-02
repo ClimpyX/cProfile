@@ -15,9 +15,17 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 
 public class ProfileListener implements Listener {
+    //First Join
+    private Date date = new Date();
+    private String currentTime = new SimpleDateFormat("HH:mm:ss").format(date);
+    private Date date1 = new Date();
+    private String currentDate = new SimpleDateFormat("dd/MM/yyyy").format(date1);
+
 
     @EventHandler
     public void asyncJoinEvent(AsyncPlayerPreLoginEvent event) {
@@ -34,10 +42,13 @@ public class ProfileListener implements Listener {
         if (user == null) {
             user = new User(event.getUniqueId());
             ProfilePlugin.getInstance().getUserManager().getUsers().put(event.getUniqueId(), user);
+            user.setName(event.getName());
+            user.setFirstLoginTime(currentDate + " " +  currentTime);
             Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[cProfile] " + user.getName() + " isimli yeni bir oyuncu olusturuluyor, UUID verisi: " + user.getUniqueUUID());
         }
 
         user.setName(event.getName());
+        user.setLastLoginTime(currentDate + " " + currentTime);
         Bukkit.getScheduler().runTaskLater(ProfilePlugin.getInstance(), user::save, 20L);
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "[cProfile] " + user.getName() + " isimli oyuncu " + user.getUniqueUUID() + " UUID'si ile giris yapiyor.");
     }

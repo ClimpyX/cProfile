@@ -5,7 +5,6 @@ import com.climpy.profile.managers.FrozenManager;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.user.User;
 import com.climpy.profile.user.UserManager;
-import com.climpy.profile.utils.fanciful.FancyMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -229,18 +228,18 @@ public class FrozenListener implements Listener {
     User user = userManager.getUser(eventPlayer.getUniqueId());
     
     if (user.isFrozenStatus()) {
-      FancyMessage fancyMessage = new FancyMessage();
+      //FancyMessage fancyMessage = new FancyMessage();
       
-      fancyMessage.text(ChatColor.DARK_RED.toString() + ChatColor.BOLD + user.getName() + " donmuş haldeyken çıkış yaptı.");
-      fancyMessage.tooltip(ChatColor.GREEN + user.getName() + " için süresiz uzaklaştırma uygula.");
-      fancyMessage.command("/ban " + user.getName() + " Ekran Paylaşımını Reddetme (SS)");
+     // fancyMessage.text(ChatColor.DARK_RED.toString() + ChatColor.BOLD + user.getName() + " donmuş haldeyken çıkış yaptı.");
+     // fancyMessage.tooltip(ChatColor.GREEN + user.getName() + " için süresiz uzaklaştırma uygula.");
+    //  fancyMessage.command("/ban " + user.getName() + " Ekran Paylaşımını Reddetme (SS)");
       
       for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
         User onlineUser = userManager.getUser(onlinePlayer.getUniqueId());
         RankType rankType = onlineUser.getRankType();
         
         if (rankType.isAboveOrEqual(RankType.MOD)) {
-          fancyMessage.send(onlinePlayer);
+      //    fancyMessage.send(onlinePlayer);
         }
       } 
     } 
@@ -254,17 +253,17 @@ public class FrozenListener implements Listener {
     User user = userManager.getUser(eventPlayer.getUniqueId());
     
     if (user.isFrozenStatus()) {
-      FancyMessage fancyMessage = new FancyMessage();
-        fancyMessage.text(ChatColor.DARK_RED.toString() + ChatColor.BOLD + user.getName() + " donmuş haldeyken çıkış yaptı.");
-      fancyMessage.tooltip(ChatColor.GREEN + user.getName() + " için süresiz uzaklaştırma uygula.");
-      fancyMessage.command("/ban " + user.getName() + " Ekran Paylaşımını Reddetme (SS)");
+     // FancyMessage fancyMessage = new FancyMessage();
+     //   fancyMessage.text(ChatColor.DARK_RED.toString() + ChatColor.BOLD + user.getName() + " donmuş haldeyken çıkış yaptı.");
+     // fancyMessage.tooltip(ChatColor.GREEN + user.getName() + " için süresiz uzaklaştırma uygula.");
+     // fancyMessage.command("/ban " + user.getName() + " Ekran Paylaşımını Reddetme (SS)");
       
       for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
         User onlineUser = userManager.getUser(onlinePlayer.getUniqueId());
         RankType rankType = onlineUser.getRankType();
         
         if (rankType.isAboveOrEqual(RankType.MOD)) {
-          fancyMessage.send(onlinePlayer);
+     //     fancyMessage.send(onlinePlayer);
         }
       } 
     } 
@@ -273,23 +272,24 @@ public class FrozenListener implements Listener {
   @EventHandler(ignoreCancelled = true, priority = EventPriority.HIGHEST)
   public void onPlayerJoinEvent(PlayerJoinEvent event) {
     Player eventPlayer = event.getPlayer();
-    
+
     UserManager userManager = ProfilePlugin.getInstance().getUserManager();
     User user = userManager.getUser(eventPlayer.getUniqueId());
-    
+
     if (user.isFrozenStatus()) {
-      FancyMessage fancyMessage = new FancyMessage();
-      fancyMessage.text(ChatColor.DARK_RED.toString() + ChatColor.BOLD + user.getName() + " katıldı, fakat donmuş durumda.");
-      fancyMessage.tooltip(ChatColor.GREEN + user.getName() + " için süresiz uzaklaştırma uygula.");
-      fancyMessage.command("/ban " + user.getName() + " Ekran Paylaşımını Reddetme (SS)");
-      
+      //    FancyMessage fancyMessage = new FancyMessage();
+      // fancyMessage.text(ChatColor.DARK_RED.toString() + ChatColor.BOLD + user.getName() + " katıldı, fakat donmuş durumda.");
+      //   fancyMessage.tooltip(ChatColor.GREEN + user.getName() + " için süresiz uzaklaştırma uygula.");
+      //  fancyMessage.command("/ban " + user.getName() + " Ekran Paylaşımını Reddetme (SS)");
+
       for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
         User onlineUser = userManager.getUser(onlinePlayer.getUniqueId());
         RankType rankType = onlineUser.getRankType();
-        
-        if (rankType.isAboveOrEqual(RankType.MOD))
-          fancyMessage.send(onlinePlayer); 
-      } 
-    } 
+
+        if (rankType.isAboveOrEqual(RankType.MOD)) {
+          //   fancyMessage.send(onlinePlayer);
+        }
+      }
+    }
   }
 }

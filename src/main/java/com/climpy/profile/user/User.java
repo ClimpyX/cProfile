@@ -34,8 +34,12 @@ public class User {
     private boolean vanishStatus;
     private boolean frozenStatus;
     private boolean onlineStatus;
-
     private boolean firstJoin;
+
+    private String serverName;
+
+    private String firstLoginTime;
+    private String lastLoginTime;
 
     public User(UUID uniqueUUID) {
         this.uniqueUUID = uniqueUUID;
@@ -45,6 +49,8 @@ public class User {
         this.vanishStatus = false;
         this.frozenStatus = false;
         this.firstJoin = true;
+
+        this.serverName = ProfilePlugin.getInstance().getConfig().getString("server-name");
 
         Player player = Bukkit.getPlayer(uniqueUUID);
         if (player != null) {
@@ -73,6 +79,10 @@ public class User {
        this.frozenStatus = document.getBoolean("frozenStatus");
        this.firstJoin = document.getBoolean("firstJoin");
        this.onlineStatus = document.getBoolean("onlineStatus");
+       this.serverName = document.getString("serverName");
+
+       this.firstLoginTime = document.getString("firstLoginTime");
+       this.lastLoginTime = document.getString("lastLoginTime");
     }
 
     public void save() {
@@ -88,9 +98,14 @@ public class User {
         document.put("frozenStatus", this.frozenStatus);
         document.put("firstJoin", this.firstJoin);
         document.put("onlineStatus", this.onlineStatus);
+        document.put("serverName", this.serverName);
+
+        document.put("firstLoginTime", this.firstLoginTime);
+        document.put("firstLoginTime", this.lastLoginTime);
 
         ProfileAPI.replaceOne("user", Filters.eq("uniqueUUID", this.uniqueUUID.toString()), document, true);
         ProfileAPI.replaceOne("user", Filters.eq("onlineStatus", this.onlineStatus), document, true);
+        ProfileAPI.replaceOne("user", Filters.eq("serverName", this.onlineStatus), document, true);
     }
 
     public void setupBukkitPlayer(Player player) {

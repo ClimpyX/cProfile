@@ -26,10 +26,10 @@ public class CoinsCommand implements CommandExecutor {
 
         if(args.length < 3) {
 
-            sender.sendMessage(C.color("  &7&m-&6&m+-&7&m------------&f &e&lKredi Komutları &7&m------------&6&m-+&7&m-"));
+            sender.sendMessage(C.color("  &7&m-&aa&m+-&7&m------------&f &e&lKredi Komutları &7&m------------&aa&m-+&7&m-"));
             sender.sendMessage(C.color(" &a&l* &8/&7kredi <ayarla/sil/ver> [oyuncuAdı..] [kredi-miktarı..]"));
             sender.sendMessage(C.color(" &a&l* &8/&7kredi <set/remove/give> [oyuncuAdı..] [kredi-miktarı..]"));
-            sender.sendMessage(C.color("     &7&m-&6&m+-&7&m--------------------------------------&6&m-+&7&m-"));
+            sender.sendMessage(C.color("     &7&m-&aa&m+-&7&m--------------------------------------&aa&m-+&7&m-"));
             return true;
         }
 
@@ -46,8 +46,8 @@ public class CoinsCommand implements CommandExecutor {
             Player t = Bukkit.getPlayer(args[1]);
             targetUser.setCredit(Long.parseLong(args[2]));
 
-            sender.sendMessage(C.color(user.getRankType().getColor() + t.getName() + " &6oyuncusunun kredi değeri &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &6olarak güncellendi."));
-            t.sendMessage(C.color("&6Kredi değeriniz &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &6olarak güncellendi."));
+            sender.sendMessage(C.color(user.getRankType().getColor() + t.getName() + " &aaoyuncusunun kredi değeri &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &aaolarak güncellendi."));
+            t.sendMessage(C.color("&aaKredi değeriniz &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &aaolarak güncellendi."));
             user.save();
             return true;
         }
@@ -65,8 +65,8 @@ public class CoinsCommand implements CommandExecutor {
 
             targetUser.setCredit(targetUser.getCredit() - amount);
 
-            sender.sendMessage(C.color(user.getRankType().getColor() + t.getName() + " &6oyuncusunun kredi değeri &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &6kadar silindi."));
-            t.sendMessage(C.color("&6Kredi değeriniz &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &6kadar silindi."));
+            sender.sendMessage(C.color(user.getRankType().getColor() + t.getName() + " &aaoyuncusunun kredi değeri &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &aakadar silindi."));
+            t.sendMessage(C.color("&aaKredi değeriniz &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &aakadar silindi."));
             user.save();
             return true;
         }
@@ -84,8 +84,8 @@ public class CoinsCommand implements CommandExecutor {
 
             targetUser.setCredit(targetUser.getCredit() + amount);
 
-            sender.sendMessage(C.color(user.getRankType().getColor() + t.getName() + " &6oyuncusunun kredi değeri &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &6kadar eklendi."));
-            t.sendMessage(C.color("&6Kredi değerinize &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &6kadar eklendi."));
+            sender.sendMessage(C.color(user.getRankType().getColor() + t.getName() + " &aaoyuncusunun kredi değeri &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &aakadar eklendi."));
+            t.sendMessage(C.color("&aaKredi değerinize &f" + NumberUtil.formatNumberByDecimal(Double.parseDouble(args[2])) + " &aakadar eklendi."));
             user.save();
             return true;
         }
