@@ -5,23 +5,23 @@ import lombok.Getter;
 
 @Getter
 public enum SymbolType {
-    SYMBOL_16("Symbol_16", "§d#CLIMPY ", RankType.CVIPPLUSPLUS),
-    SYMBOL_15("Symbol_15", "§e§lUwU ", RankType.CVIPPLUSPLUS),
-    SYMBOL_14("Symbol_14", "§e§lCRY ", RankType.CVIPPLUSPLUS),
-    SYMBOL_13("Symbol_13", "§e§lMASTER ", RankType.CVIP),
-    SYMBOL_12("Symbol_12", "§e§lPRO ", RankType.CVIP),
-    SYMBOL_11("Symbol_11", "§e§l❝E❞ ", RankType.CVIP),
-    SYMBOL_10("Symbol_10","§a§lE ", RankType.CVIP),
-    SYMBOL_9("Symbol_9", "§a§l❦ ", RankType.MVIPPLUS),
-    SYMBOL_8("Symbol_8", "§a§l✦ ", RankType.MVIPPLUS),
-    SYMBOL_7("Symbol_7", "§a§l✎ ", RankType.MVIP),
-    SYMBOL_6("Symbol_6", "§d§l☘ ", RankType.MVIP),
-    SYMBOL_5("Symbol_5", "§d§l♚ ", RankType.CVIP),
-    SYMBOL_4("Symbol_4", "§d§l❥ ", RankType.CVIP),
-    SYMBOL_3("Symbol_3", "§f§l♫ ", RankType.VIPPLUS),
-    SYMBOL_2("Symbol_2", "§f§l✿ ", RankType.VIPPLUS),
-    SYMBOL_1("Symbol_1", "§f§l★ ", RankType.VIPPLUS),
-    SYMBOL_0("Symbol_0", "", RankType.VIP);
+    SYMBOL_16("Sembol 16", "§d#CLIMPY ", RankType.CVIPPLUSPLUS),
+    SYMBOL_15("Sembol 15", "§e§lUwU ", RankType.CVIPPLUSPLUS),
+    SYMBOL_14("Sembol 14", "§e§lCRY ", RankType.CVIPPLUSPLUS),
+    SYMBOL_13("Sembol 13", "§e§lMASTER ", RankType.CVIP),
+    SYMBOL_12("Sembol 12", "§e§lPRO ", RankType.CVIP),
+    SYMBOL_11("Sembol 11", "§e§l❝E❞ ", RankType.CVIP),
+    SYMBOL_10("Sembol 10","§a§lE ", RankType.CVIP),
+    SYMBOL_9("Sembol 9", "§a§l❦ ", RankType.MVIPPLUS),
+    SYMBOL_8("Sembol 8", "§a§l✦ ", RankType.MVIPPLUS),
+    SYMBOL_7("Sembol 7", "§a§l✎ ", RankType.MVIP),
+    SYMBOL_6("Sembol 6", "§d§l☘ ", RankType.MVIP),
+    SYMBOL_5("Sembol 5", "§d§l♚ ", RankType.CVIP),
+    SYMBOL_4("Sembol 4", "§d§l❥ ", RankType.CVIP),
+    SYMBOL_3("Sembol 3", "§f§l♫ ", RankType.VIPPLUS),
+    SYMBOL_2("Sembol 2", "§f§l✿ ", RankType.VIPPLUS),
+    SYMBOL_1("Sembol 1", "§f§l★ ", RankType.VIPPLUS),
+    SYMBOL_0("Sembol 0", "", RankType.VIP);
     private String displayName, prefix;
     private RankType rankType;
 

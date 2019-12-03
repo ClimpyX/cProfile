@@ -39,7 +39,7 @@ public class CoinsCommand implements CommandExecutor {
             User targetUser = ProfilePlugin.getInstance().getUserManager().getUser(args[1]);
 
             if (targetUser == null) {
-                sender.sendMessage(C.color("&f" + args[1] + " &cismine sahip bir oyuncu bulunamadı."));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cVeritabanında &f'" + args[0] + "' &cismine sahip bir oyuncu bulunamadı."));
                 return true;
             }
 
@@ -56,7 +56,7 @@ public class CoinsCommand implements CommandExecutor {
             User targetUser = ProfilePlugin.getInstance().getUserManager().getUser(args[1]);
 
             if (targetUser == null) {
-                sender.sendMessage(C.color("&f" + args[1] + " &cismine sahip bir oyuncu bulunamadı."));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cVeritabanında &f'" + args[0] + "' &cismine sahip bir oyuncu bulunamadı."));
                 return true;
             }
 
@@ -75,7 +75,7 @@ public class CoinsCommand implements CommandExecutor {
             User targetUser = ProfilePlugin.getInstance().getUserManager().getUser(args[1]);
 
             if (targetUser == null) {
-                sender.sendMessage(C.color("&f" + args[1] + " &cismine sahip bir oyuncu bulunamadı."));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cVeritabanında &f'" + args[0] + "' &cismine sahip bir oyuncu bulunamadı."));
                 return true;
             }
 

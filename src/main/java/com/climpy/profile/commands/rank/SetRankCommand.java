@@ -35,7 +35,7 @@ public class SetRankCommand implements CommandExecutor {
         User targetUser = ProfilePlugin.getInstance().getUserManager().getUser(args[0]);
 
         if (targetUser == null) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&f" + args[0] + " &cismine sahip bir oyuncu bulunamadı."));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cVeritabanında &f'" + args[0] + "' &cismine sahip bir oyuncu bulunamadı."));
             return true;
         }
 

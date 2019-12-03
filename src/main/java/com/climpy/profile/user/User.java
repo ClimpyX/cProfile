@@ -5,6 +5,8 @@ import com.climpy.profile.ProfilePlugin;
 import com.climpy.profile.mongo.CollectionManager;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.symbol.SymbolType;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mongodb.MongoClient;
 import com.mongodb.client.model.Filters;
 import lombok.Data;
@@ -15,9 +17,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
-import java.util.Collection;
-import java.util.Locale;
-import java.util.UUID;
+
+import java.util.*;
 
 @Data @Getter @Setter
 public class User {
@@ -40,6 +41,9 @@ public class User {
 
     private String firstLoginTime;
     private String lastLoginTime;
+
+    private String currentAddress;
+    private List<String> ipAddresses = new ArrayList<>();
 
     public User(UUID uniqueUUID) {
         this.uniqueUUID = uniqueUUID;
@@ -83,6 +87,9 @@ public class User {
 
        this.firstLoginTime = document.getString("firstLoginTime");
        this.lastLoginTime = document.getString("lastLoginTime");
+
+        this.currentAddress = document.getString("currentAddress");
+        this.ipAddresses = new Gson().fromJson(document.getString("ipAddresses"), new TypeToken<List<String>>() {}.getType());
     }
 
     public void save() {
@@ -101,11 +108,16 @@ public class User {
         document.put("serverName", this.serverName);
 
         document.put("firstLoginTime", this.firstLoginTime);
-        document.put("firstLoginTime", this.lastLoginTime);
+        document.put("lastLoginTime", this.lastLoginTime);
+
+        document.put("currentAddress", this.currentAddress);
+        document.put("ipAddresses", new Gson().toJson(this.ipAddresses, new TypeToken<List<String>>() {}.getType()));
 
         ProfileAPI.replaceOne("user", Filters.eq("uniqueUUID", this.uniqueUUID.toString()), document, true);
         ProfileAPI.replaceOne("user", Filters.eq("onlineStatus", this.onlineStatus), document, true);
-        ProfileAPI.replaceOne("user", Filters.eq("serverName", this.onlineStatus), document, true);
+        ProfileAPI.replaceOne("user", Filters.eq("serverName", this.serverName), document, true);
+        ProfileAPI.replaceOne("user", Filters.eq("firstLoginTime", this.firstLoginTime), document, true);
+        ProfileAPI.replaceOne("user", Filters.eq("lastLoginTime", this.lastLoginTime), document, true);
     }
 
     public void setupBukkitPlayer(Player player) {

@@ -15,6 +15,8 @@ import com.climpy.profile.mongo.MongoConnection;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.user.User;
 import com.climpy.profile.user.UserManager;
+import com.climpy.profile.utils.TaskUtil;
+import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,6 +26,8 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.lang.reflect.Type;
+import java.util.List;
 
 @Getter
 public class ProfilePlugin extends JavaPlugin  {
@@ -32,11 +36,14 @@ public class ProfilePlugin extends JavaPlugin  {
     public UserManager userManager;
     private MongoConnection mongoConnection;
     private static InventoryManager invManager;
-    public static boolean enabled = false;
+    private boolean loaded;
     public FileConfig mainConfig;
 
     private StaffModeManager staffModeManager;
     private FrozenManager frozenManager;
+
+    public static Type LIST_STRING_TYPE = new TypeToken<List<String>>() {
+    }.getType();
 
     @Override
     public void onEnable() {
@@ -68,7 +75,7 @@ public class ProfilePlugin extends JavaPlugin  {
             }
         });
 
-        enabled = true;
+        TaskUtil.runLater(() -> this.loaded = true, 60L);
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[cProfile] Sunucu: &aAcik"));
     }
 
@@ -91,8 +98,6 @@ public class ProfilePlugin extends JavaPlugin  {
             }
         }
 
-
-        enabled = false;
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', "&6[cProfile] Sunucu: &cKapali"));
         instance = null;
     }
