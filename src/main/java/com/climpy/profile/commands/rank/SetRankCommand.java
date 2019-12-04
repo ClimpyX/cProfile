@@ -3,6 +3,9 @@ package com.climpy.profile.commands.rank;
 import com.climpy.profile.ProfilePlugin;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.user.User;
+import com.climpy.profile.utils.C;
+import com.climpy.profile.utils.TextSplitter;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,6 +13,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.List;
 import java.util.Locale;
 
 public class SetRankCommand implements CommandExecutor {
@@ -25,10 +29,24 @@ public class SetRankCommand implements CommandExecutor {
             }
         }
 
-        if (args.length < 2) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bDoğru Kullanım: &6/" + label + " [Oyuncu-Adı] <RankAdı>"));
+        if (args.length == 0) {
+            sender.sendMessage(C.CHAT_BAR);
+            sender.sendMessage(ChatColor.GOLD + "Rütbe Bilgileri:");
             sender.sendMessage(" ");
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Rütbe grupları: &f" + RankType.getAllRanks()));
+            sender.sendMessage(ChatColor.GRAY + "Görünen Adı: " + ChatColor.RESET + user.getRankType().getRankName());
+            sender.sendMessage(ChatColor.GRAY + "Prefix: " + ChatColor.RESET + user.getRankType().getPrefix() + player.getName());
+            sender.sendMessage(" ");
+            List<String> permissions = user.getRankType().getPlayerAllPermissions(player);
+            sender.sendMessage(ChatColor.GRAY + "Yetkiler " + ChatColor.RESET + "(" + permissions.size() + ")");
+            if(!permissions.isEmpty()) {
+                sender.sendMessage(permissions.toString());
+            }
+            sender.sendMessage(C.CHAT_BAR);
+            return true;
+        }
+
+        if (args.length < 2) {
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cDoğru Kullanım: /" + label + " <oyuncu-Adı> [rütbe-İsmi]"));
             return true;
         }
 

@@ -2,8 +2,11 @@ package com.climpy.profile;
 
 import com.climpy.profile.commands.UserCommand;
 import com.climpy.profile.commands.coin.CoinsCommand;
+import com.climpy.profile.commands.essentials.*;
 import com.climpy.profile.commands.rank.ListRankCommand;
 import com.climpy.profile.commands.rank.SetRankCommand;
+import com.climpy.profile.commands.staff.FreezeCommand;
+import com.climpy.profile.commands.staff.StaffModeCommand;
 import com.climpy.profile.commands.symbol.SetSymbolCommand;
 import com.climpy.profile.commands.symbol.SymbolCommand;
 import com.climpy.profile.config.FileConfig;
@@ -92,6 +95,8 @@ public class ProfilePlugin extends JavaPlugin  {
             if (onlinePlayer == null)
                 continue;
             User onlineUser = this.userManager.getUser(onlinePlayer.getUniqueId());
+            if(onlineUser == null)
+                continue;
             if (onlineUser.getRankType().isAboveOrEqual(RankType.MOD) && onlineUser.isStaffMode()) {
                 onlinePlayer.sendMessage(ChatColor.DARK_RED.toString() + ChatColor.RED + "- moderatör modu devredışı.");
                 this.staffModeManager.setStaffMode(onlineUser.getUniqueUUID(), false);
@@ -106,10 +111,10 @@ public class ProfilePlugin extends JavaPlugin  {
         PluginManager pm = getServer().getPluginManager();
 
         pm.registerEvents(new ProfileListener(), this);
+        pm.registerEvents(new StaffModeListener(), this);
+        pm.registerEvents(new FrozenListener(), this);
         pm.registerEvents(new ServerListener(), this);
-     //   pm.registerEvents(new StaffModeListener(), this);
-    //    pm.registerEvents(new FrozenListener(), this);
-        pm.registerEvents(new SecurityListener(this), this);
+        pm.registerEvents(new SecurityListener(), this);
     }
 
     public void registerCommand() {
@@ -119,6 +124,15 @@ public class ProfilePlugin extends JavaPlugin  {
         getCommand("setsymbol").setExecutor(new SetSymbolCommand());
         getCommand("symbol").setExecutor(new SymbolCommand());
         getCommand("coins").setExecutor(new CoinsCommand());
+        getCommand("list").setExecutor(new ListCommand());
+        getCommand("broadcast").setExecutor(new BroadcastCommand());
+        getCommand("staff").setExecutor(new StaffModeCommand());
+        getCommand("freeze").setExecutor(new FreezeCommand());
+        getCommand("day").setExecutor(new DayCommand());
+        getCommand("night").setExecutor(new NightCommand());
+        getCommand("world").setExecutor(new WorldTeleportCommand());
+        getCommand("createworld").setExecutor(new WorldCreateCommand());
+        getCommand("deleteworld").setExecutor(new WorldDeleteCommand());
     }
 
     public static String separatorCheck(StringBuilder stringBuilder) {

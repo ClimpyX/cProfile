@@ -1,5 +1,6 @@
 package com.climpy.profile.listeners;
 
+import com.climpy.profile.ProfileAPI;
 import com.climpy.profile.ProfilePlugin;
 import com.climpy.profile.managers.StaffModeManager;
 import com.climpy.profile.mongo.CollectionManager;
@@ -7,6 +8,10 @@ import com.climpy.profile.user.User;
 import com.climpy.profile.utils.C;
 import com.climpy.profile.utils.MiscUtils;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
+import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -17,7 +22,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 
 public class ProfileListener implements Listener {
@@ -30,15 +37,13 @@ public class ProfileListener implements Listener {
 
     @EventHandler
     public void asyncJoinEvent(AsyncPlayerPreLoginEvent event) {
-        Player player = Bukkit.getPlayer(event.getUniqueId());
-        User user = ProfilePlugin.getInstance().getUserManager().getUser(event.getUniqueId());
-
         if (!ProfilePlugin.getInstance().isLoaded()) {
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
             event.setKickMessage(C.color("&6[cProfile]\n\n&cSunucu yeniden başlatılıyor.."));
             return;
         }
 
+        Player player = Bukkit.getPlayer(event.getUniqueId());
         if (player != null && player.isOnline()) {
             event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
             event.setKickMessage(ChatColor.RED + "\nBağlantıyı kestikten sonra çok hızlı giriş yapmayı denediniz.\nBirkaç saniye sonra tekrar deneyin.");
@@ -46,6 +51,23 @@ public class ProfileListener implements Listener {
             return;
         }
 
+        List<String> players = new ArrayList<>();
+        try (MongoCursor mongoCursor = ProfileAPI.findAll("user").iterator()) {
+            while (mongoCursor.hasNext()) {
+                players.add(((Document) mongoCursor.next()).getString("name"));
+            }
+        }
+
+        for (String originalName : players) {
+            String name = event.getName();
+            if(!originalName.equals(name)) {
+                event.setLoginResult(AsyncPlayerPreLoginEvent.Result.KICK_OTHER);
+                event.setKickMessage(ChatColor.RED + "Orijinal kullanıcı adı ile giriş yapınız. (" + originalName + ")");
+                return;
+            }
+        }
+
+        User user = ProfilePlugin.getInstance().getUserManager().getUser(event.getUniqueId());
         if (user == null) {
             user = new User(event.getUniqueId());
             ProfilePlugin.getInstance().getUserManager().getUsers().put(event.getUniqueId(), user);
@@ -54,7 +76,6 @@ public class ProfileListener implements Listener {
             if (user.getFirstLoginTime() == null) {
                 user.setFirstLoginTime(currentDate + " " + currentTime);
             }
-
 
             if (user.getCurrentAddress() == null) {
                 user.setCurrentAddress(event.getAddress().getHostAddress());
@@ -73,9 +94,7 @@ public class ProfileListener implements Listener {
         }
 
         user.setName(event.getName());
-    //    user.setLastLoginTime(currentDate + " " + currentTime);
         Bukkit.getScheduler().runTaskLater(ProfilePlugin.getInstance(), user::save, 20L);
-        ProfilePlugin.getInstance().getLogger().log(Level.INFO, user.getName() + " isimli oyuncu " + user.getUniqueUUID() + " UUID'si ile giris yapiyor.");
     }
 
     @EventHandler
@@ -95,8 +114,11 @@ public class ProfileListener implements Listener {
     public void joinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         User user = ProfilePlugin.getInstance().getUserManager().getUser(player.getUniqueId());
+        if (user == null)
+            return;
 
         user.setLastLoginTime(currentDate + " " + currentTime);
+        user.setOnlineStatus(true);
         user.save();
     }
 }

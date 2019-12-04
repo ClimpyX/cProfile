@@ -5,3 +5,4 @@ mongoDB:
   host: localhost
   port: 27017
 server-name: Loading
+game-server: false

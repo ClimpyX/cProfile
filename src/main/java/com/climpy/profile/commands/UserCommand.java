@@ -27,7 +27,7 @@ public class UserCommand implements CommandExecutor {
         }
 
         if(args.length < 1) {
-            sender.sendMessage(C.color("&6Doğru Kullanım: &b/" + s + " <oyuncuAdı>"));
+            sender.sendMessage(C.color("&cDoğru Kullanım: /" + s + " <oyuncuAdı>"));
             return true;
         }
 
@@ -38,25 +38,25 @@ public class UserCommand implements CommandExecutor {
             return true;
         }
 
-        sender.sendMessage(C.color("&7&m--------------------------------------"));
-        sender.sendMessage(C.color("&6Kullanıcı: &f"  + targetUser.getName()));
-        sender.sendMessage(C.color("&6UUID: &f" + targetUser.getUniqueUUID()));
-        sender.sendMessage(C.color("&6Mevcut IP: &f" + targetUser.getCurrentAddress()));
-        sender.sendMessage(C.color("&6Tüm IP adresleri: &f" + targetUser.getIpAddresses()));
+        sender.sendMessage(C.CHAT_BAR);
+        sender.sendMessage(C.color("&9Kullanıcı: &f"  + targetUser.getName()));
+        sender.sendMessage(C.color("&9UUID: &f" + targetUser.getUniqueUUID()));
+        sender.sendMessage(C.color("&9Mevcut IP: &f" + targetUser.getCurrentAddress()));
+        sender.sendMessage(C.color("&9Tüm IP adresleri: &f" + targetUser.getIpAddresses()));
         sender.sendMessage(C.color(" "));
-        sender.sendMessage(C.color("&6Rütbe: &f" + targetUser.getRankType().getRankName()));
-        sender.sendMessage(C.color("&6Sembol: &f" + targetUser.getSymbolType().getDisplayName()));
+        sender.sendMessage(C.color("&9Rütbe: &f" + targetUser.getRankType().getRankName()));
+        sender.sendMessage(C.color("&9Sembol: &f" + targetUser.getSymbolType().getDisplayName()));
         sender.sendMessage(C.color(" "));
-        sender.sendMessage(C.color("&6Sunucu: &f" + targetUser.getServerName()));
-        sender.sendMessage(C.color("&6Kredi Miktarı: &f" + targetUser.getCredit()));
-        sender.sendMessage(C.color("&6Aktiflik Durumu: &f" + (targetUser.isOnlineStatus() ? "Aktif" : "Kapalı")));
+        sender.sendMessage(C.color("&9Sunucu: &f" + targetUser.getServerName()));
+        sender.sendMessage(C.color("&9Kredi Miktarı: &f" + targetUser.getCredit()));
+        sender.sendMessage(C.color("&9Aktiflik Durumu: &f" + (targetUser.isOnlineStatus() ? "Aktif" : "Kapalı")));
         sender.sendMessage(C.color(" "));
-        sender.sendMessage(C.color("&6İlk giriş: &f" + targetUser.getFirstLoginTime()));
-        sender.sendMessage(C.color("&6Son giriş: &f" + targetUser.getLastLoginTime()));
+        sender.sendMessage(C.color("&9İlk giriş: &f" + targetUser.getFirstLoginTime()));
+        sender.sendMessage(C.color("&9Son giriş: &f" + targetUser.getLastLoginTime()));
         sender.sendMessage(C.color(" "));
-        sender.sendMessage(C.color("&6Freeze Durumu: &f" + (targetUser.isFrozenStatus() ? "&aAçık" : "&cKapalı")));
-        sender.sendMessage(C.color("&6Staff Modu: &f" + (targetUser.isStaffMode() ? "&aAçık" : "&cKapalı")));
-        sender.sendMessage(C.color("&7&m--------------------------------------"));
+        sender.sendMessage(C.color("&9Freeze Durumu: &f" + (targetUser.isFrozenStatus() ? "&aAçık" : "&cKapalı")));
+        sender.sendMessage(C.color("&9Staff Modu: &f" + (targetUser.isStaffMode() ? "&aAçık" : "&cKapalı")));
+        sender.sendMessage(C.CHAT_BAR);
         return true;
     }
 }

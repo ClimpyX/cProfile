@@ -6,11 +6,11 @@ import lombok.Setter;
 
 @Getter @Setter
 public abstract class DataCollection {
-    private final ProfilePlugin bedrockPlugin;
+    private final ProfilePlugin profilePlugin;
     private String registeredName;
 
-    public DataCollection(ProfilePlugin bedrockPlugin, String registeredName) {
-        this.bedrockPlugin = bedrockPlugin;
+    public DataCollection(ProfilePlugin profilePlugin, String registeredName) {
+        this.profilePlugin = profilePlugin;
         this.registeredName = registeredName;
     }
 

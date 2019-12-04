@@ -4,6 +4,7 @@ import com.climpy.profile.ProfilePlugin;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.user.User;
 import com.climpy.profile.user.UserManager;
+import com.climpy.profile.utils.C;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -36,8 +37,9 @@ public class ListRankCommand implements CommandExecutor {
             stringBuilder.append("\n");
         }
 
-        sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&dRütbeler kullanımlarına göre global olarak listelendi;"));
+        sender.sendMessage(C.CHAT_BAR);
         sender.sendMessage(ProfilePlugin.separatorCheck(stringBuilder));
+        sender.sendMessage(C.CHAT_BAR);
         return true;
     }
 }

@@ -45,7 +45,7 @@ public class StaffModeListener implements Listener {
     StaffModeManager staffModeManager = ProfilePlugin.getInstance().getStaffModeManager();
     User user = ProfilePlugin.getInstance().getUserManager().getUser(eventPlayer.getUniqueId());
     
-    if (event.hasItem() && (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) && 
+    if (event.hasItem() && (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) &&
       user.getRankType().isAboveOrEqual(RankType.MOD) && user.isStaffMode()) {
       event.setCancelled(true);
       

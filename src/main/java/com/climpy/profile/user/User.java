@@ -2,12 +2,10 @@ package com.climpy.profile.user;
 
 import com.climpy.profile.ProfileAPI;
 import com.climpy.profile.ProfilePlugin;
-import com.climpy.profile.mongo.CollectionManager;
 import com.climpy.profile.rank.RankType;
 import com.climpy.profile.symbol.SymbolType;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mongodb.MongoClient;
 import com.mongodb.client.model.Filters;
 import lombok.Data;
 import lombok.Getter;
@@ -18,7 +16,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 @Data @Getter @Setter
 public class User {

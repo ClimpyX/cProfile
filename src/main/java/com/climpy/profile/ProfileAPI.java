@@ -1,6 +1,5 @@
 package com.climpy.profile;
 
-
 import com.climpy.profile.mongo.CollectionManager;
 import com.climpy.profile.mongo.MongoConnection;
 import com.mongodb.client.FindIterable;

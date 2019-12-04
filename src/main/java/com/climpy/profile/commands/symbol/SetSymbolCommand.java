@@ -26,7 +26,7 @@ public class SetSymbolCommand implements CommandExecutor {
         }
 
         if (args.length < 2) {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&bDoğru Kullanım: &6/" + label + " [Oyuncu-Adı] <symbolID>"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&cDoğru Kullanım: /" + label + " [Oyuncu-Adı] <symbolID>"));
             return true;
         }
 

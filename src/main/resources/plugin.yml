@@ -19,3 +19,10 @@ commands:
     aliases: [staffmode]
   freeze:
     aliases: [dondur]
+  list:
+  broadcast:
+  day:
+  night:
+  world:
+  createworld:
+  deleteworld:
